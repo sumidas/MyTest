@@ -1,0 +1,158 @@
+<div ng-app="app" ng-controller="inController" ng-init="addFormItems()" align="center">
+    <h3>Inventory Details</h3>
+
+    <form>
+        <fieldset>
+            <legend align="center"><b>Inventory Item Entry</b></legend><br>
+        <table>
+            <tr>
+                <td>
+                    Item Name:
+                </td>
+                <td>
+                    <input type="text" ng-model="invenName" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <br> Unit of Measurment:
+                </td>
+                <td>
+                    <br><input type="text" ng-model="unitMeasure" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Unit Cost:
+                </td>
+                <td>
+                    <br><input type="number" ng-model="cost" required min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Opening Balance:
+                </td>
+                <td>
+                    <br><input type="number" ng-model="openBalance" min="1" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Current Balance:<br>(Quantity)
+                </td>
+                <td>
+                    <br> <input type="number" ng-model="currBalance" min="1" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Dimension:
+                </td>
+                <td>
+                    <br> <input type="text" ng-model="dimension" required>
+                </td>
+            </tr>
+
+        </table>
+
+       <br>
+        <button ng-click="reset1()" class="button1">Reset</button><br><br>
+        <button ng-click="entry()" class="button">Entry</button><br>
+        <br>
+        {{ output }}<br>
+            </fieldset>
+        </form>
+
+    <br><br>
+
+    <form>
+
+        <fieldset>
+            <legend align="center"><b>Inventory Item Deletion</b></legend><br>
+
+        Item Name: <input type="text" ng-model="delName" required><br><br>
+
+        <br><button ng-click="delete()" class="button">Remove</button><br><br>
+        {{ x }}
+            </fieldset>
+    </form>
+
+    <br><br>
+    <form>
+        <fieldset>
+            <legend align="center"><b>Inventory Item Display</b></legend><br>
+
+            <input type="text" ng-model="test"><br><br>
+
+        <button ng-click="display()" class="button">Display</button><br><br>
+    <div style="overflow-x:auto;">
+        <table border="3" class="table">
+            <tr bgcolor="#add8e6">
+                <th>Inventory Item ID</th>
+                <th>Inventory Name</th>
+                <th>Unit of Measurment</th>
+                <th>Unit Cost</th>
+                <th>Opening Balance</th>
+                <th>Current Balance</th>
+                <th>Dimensions</th>
+            </tr>
+            <tr ng-repeat="x in output1 | filter:test" align="center">
+                <td>INVEN_{{x.invenID}}</td>
+                <td>{{x.itemName}}</td>
+                <td>{{x.unitMeasure}}</td>
+                <td>{{x.cost}}</td>
+                <td>{{x.openBalance}}</td>
+                <td>{{x.currBalance}}</td>
+                <td>{{x.dimension}}</td>
+            </tr>
+
+        </table>
+        <br><br>
+    </div>
+            </fieldset>
+    </form>
+
+    <form>
+        <br><br>
+            <fieldset>
+                <legend align="center"><b>Place Purchase Order</b></legend><br>
+        Enter Items and No. of Quantity to be Purchased: <br>
+        <table>
+            <tr>
+                <td>
+                    Item:
+                </td>
+                <td>
+                    <select ng-repeat="item in table.item track by $index" type='text' ng-model='table.item[$index]'>
+                        <option ng-repeat="item in dropdown" value="{{item.itemName}}">{{item.itemName}}
+                        </option>
+                    </select>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Quantity:
+                </td>
+                <td>
+                    <input ng-repeat="quantity in table.quantity track by $index" type='number' ng-model='table.quantity[$index]'
+                           placeholder='Quantity:' min="1"><br>
+                </td>
+            </tr>
+        </table>
+
+        <div>
+            <br><button ng-click="addFormItems()" class="button1">Add New Item</button>
+            <button ng-click="deleteFormItems()" class="button1">Delete Item</button>
+            <button ng-click="reset()" class="button1">Reset</button><br><br>
+            <button ng-click="submitItemTable()" class="button">Submit</button>
+        </div>
+        <!--<pre>{{ table | json }}</pre>-->
+        <br>
+        {{ inOutput }}
+      </fieldset><br>
+    </form>
+    <br><br><br>
+</div>
+

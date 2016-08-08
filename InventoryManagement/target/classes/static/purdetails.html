@@ -1,0 +1,162 @@
+<div ng-controller="purController" ng-init="addFormItems()" align="center">
+    <h3>Purchase Details</h3>
+
+    <form>
+        <fieldset>
+            <legend align="center"><b>Items to Purchase</b></legend><br>
+
+            <button ng-click="getContent()" class="button">Display</button><br><br>
+
+            <div style="overflow-x:auto;">
+            <table border="2" class="table">
+                <tr bgcolor="#add8e6" >
+                    <th>
+                        Item ID <br>
+                    </th>
+                    <th>
+                        Items to Purchase
+                    </th>
+                    <th>
+                        Item Quantity
+                    </th>
+                </tr>
+                <tr ng-repeat="x in dropdown" align="center">
+                    <td>
+                        ITM_{{x.id}}
+                    </td>
+                    <td>
+                       {{x.itemToPurchase}}
+                    </td>
+                    <td>
+                       {{x.itemQuanToPurchase}}
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </fieldset>
+    </form>
+
+    <br><br>
+    <form >
+
+        <fieldset>
+            <legend align="center"><b>Purchase Item Entry</b></legend><br>
+
+        <table>
+            <tr>
+                <th align="left">
+                    Vendor Name:
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type='text' ng-model='table.vendorName' placeholder='Name:'><br>
+                </td>
+            </tr>
+            <tr>
+                <th align="left">
+                    <br>Item to be Purchased:
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Raw Item:
+                </td>
+                <td>
+                    <select ng-repeat="item in table.item track by $index" type='text' ng-model='table.item[$index]'>
+                        <option ng-repeat="item in dropdown" value="{{item.itemToPurchase}}">{{item.itemToPurchase}}
+                        </option>
+                    </select>
+                </td>
+            <tr>
+                <td>
+                    Quantity:
+                </td>
+                <td>
+                   <input ng-repeat="quantity in table.quantity track by $index" type='number' ng-model='table.quantity[$index]'
+                          placeholder='Quantity' min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cost:
+                </td>
+                <td>
+                    <input ng-repeat="cost1 in table.cost1 track by $index" type='number' ng-model='table.cost1[$index]'
+                           placeholder='Cost:' min="1">
+                </td>
+            </tr>
+            </tr>
+            <tr>
+                <th align="left">
+                   <br> Tax %:
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" ng-model='table.tax' placeholder='Tax:' min="1" step="0.01">
+                </td>
+            </tr>
+        </table>
+
+        <br> <button ng-click="addFormItems()" class="button1">Add New Item</button>
+            <button ng-click="deleteFormItems()" class="button1">Delete Item</button>
+            <button ng-click="reset()" class="button1">Reset</button>
+        <br><br><button ng-click="submitPurTable()" class="button">Submit</button><br>
+
+        <!--<pre>{{ table | json }}</pre>-->
+        <br>
+        {{ purOutput }}<br>
+            </fieldset>
+    </form>
+
+    <br><br>
+    <form>
+        <br>
+        <fieldset>
+            <legend align="center"><b>Purchase History</b></legend><br>
+            <input type="text" ng-model="model"><br><br>
+        <button ng-click="purDisplay()" class="button">Display</button><br><br>
+        <div style="overflow-x:auto;">
+            <table border="1" class="table">
+                <tr bgcolor="#add8e6">
+                    <th>Purchase Item ID</th>
+                    <th>Vendor Name</th>
+                    <th>Purchase Date</th>
+                    <th>Raw Materials Purchased</th>
+                    <th>Total Cost</th>
+                    <th>Tax%</th>
+                    <th>Net Cost</th>
+
+                </tr>
+                <tr ng-repeat="x in output | filter:model" align="center">
+                    <td>PUR_{{x.purId}}</td>
+                    <td>{{x.vendorName}}</td>
+                    <td>{{x.purDate}}</td>
+                    <td>
+                        <table border>
+                            <tr bgcolor="#add8e6">
+                                <th>Raw Item ID</th>
+                                <th>Raw Item Name</th>
+                                <th>Raw Item Quantity</th>
+                                <th>Raw Item Cost</th>
+                            </tr>
+                            <tr ng-repeat="x1 in x.purItemList" align="center">
+                                <td>PUR_IT_{{x1.purItemId}}</td>
+                                <td>{{x1.purItem}}</td>
+                                <td>{{x1.purItemQuan}}</td>
+                                <td>{{x1.purItemCost}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>{{x.totalCost}}</td>
+                    <td>{{x.tax}}</td>
+                    <td>{{x.netCost}}</td>
+                </tr>
+
+            </table>
+        </div>
+            </fieldset>
+    </form>
+    <br><br><br>
+</div>

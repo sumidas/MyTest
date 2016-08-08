@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <title>Welcome Page</title>
+    <link rel="stylesheet" type="text/css" th:media="all" media="all"
+          href="style.css" th:href="@{style.css}"/>
+
+    <script src="angular.js" th:src="@{/angular.js}"></script>
+
+    <script src="/webjars/angularjs/1.4.9/angular-resource.js" th:src="@{/webjars/angularjs/1.4.9/angular-resource.js}"></script>
+
+    <script src="/webjars/angularjs/1.4.9/angular-route.js" th:src="@{/webjars/angularjs/1.4.9/angular-route.js}"></script>
+
+    <script src="angular-ui-router.js" th:src="@{/angular-ui-router.js}"></script>
+
+    <script src="app.js" th:src="@{/app.js}"></script>
+    <!--<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.css}" />-->
+
+    <script src="controller.js"></script>
+
+</head>
+<body th:bgcolor="beige">
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out" class="button"/>
+</form>
+
+<div class="in" align="center">
+    <h3>Inventory Management System</h3>
+<img src="inventory-management-1.jpg" th:src="@{/inventory-management-1.jpg}"/>
+</div>
+
+<br/><br/>
+
+<div ng-app="app" align="center">
+    <ul>
+        <li><a ui-sref="indetails">Inventory Details</a></li>
+        <li><a ui-sref="purdetails">Purchase Details</a></li>
+        <li><a ui-sref="prodetails">Production Details</a></li>
+        <li style="float:right" class="active">
+            <h3 th:inline="text"> Welcome [[${#httpServletRequest.remoteUser}]] !!.. </h3>
+        </li>
+    </ul>
+    <div ui-view=""></div>
+</div>
+
+</body>
+</html>

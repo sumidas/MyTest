@@ -1,0 +1,107 @@
+<div ng-controller="proController" ng-init="addFormItems()" align="center">
+    <h3>Production Details</h3>
+
+    <form >
+
+        <fieldset>
+            <legend align="center"><b>Production Item Entry</b></legend><br>
+
+        <table>
+            <tr>
+                <td>
+                    Production Item Name:<br>
+                </td>
+                <td>
+                    <input type='text' ng-model='table.proName' placeholder='Name:'><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Raw Material Required: <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Item: <br>
+                </td>
+                <td>
+                    <select ng-repeat="item in table.item track by $index" type='text' ng-model='table.item[$index]'>
+                        <option ng-repeat="item in dropdown" value="{{item.itemName}}">{{item.itemName}}
+                        </option>
+                    </select>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Quantity: <br>
+                </td>
+                <td>
+                    <input ng-repeat="quantity in table.quantity track by $index" type='number' ng-model='table.quantity[$index]'
+                           placeholder='Quantity:' min="1">
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>Total Manufactured Item:<br>
+                </td>
+                <td>
+                    <br><input type='number' ng-model='table.total' placeholder='Total:' min="1"><br>
+                </td>
+            </tr>
+        </table>
+        <br> <button ng-click="addFormItems()" class="button1">Add New Item</button>
+            <button ng-click="deleteFormItems()" class="button1">Delete Item</button>
+            <button ng-click="reset()" class="button1">Reset</button><br><br>
+        <button ng-click="submitTable()" class="button">Submit</button>
+        <!--<br>-->
+        <!--<pre>{{ table | json }}</pre>-->
+        <br><br>
+        {{ proOutput }}<br>
+            </fieldset>
+    </form>
+
+    <form>
+       <br>
+        <fieldset>
+            <legend align="center"><b>Production History</b></legend><br>
+            <input type="text" ng-model="test"><br><br>
+        <button ng-click="proDisplay()" class="button">Display</button><br><br>
+        <div style="overflow-x:auto;">
+            <table border="1" class="table">
+                <tr bgcolor="#add8e6">
+                    <th>Production Item ID</th>
+                    <th>Production Item</th>
+                    <th>Production Date</th>
+                    <th>Raw Materials Required</th>
+                    <th>Total Manufactured Item</th>
+
+                </tr>
+                <tr ng-repeat="x in output | filter:test" align="center">
+                    <td>PRO_{{x.proId}}</td>
+                    <td>{{x.proItem}}</td>
+                    <td>{{x.proDate}}</td>
+                    <td>
+                        <table border="1">
+                            <tr bgcolor="#add8e6">
+                                <th>Raw Item ID</th>
+                                <th>Raw Item Name</th>
+                                <th>Raw Item Quantity</th>
+                            </tr>
+                            <tr ng-repeat="x1 in x.proItemList" align="center">
+                                <td>PRO_IT_{{x1.proItemId}}</td>
+                                <td>{{x1.rawItem}}</td>
+                                <td>{{x1.proItemQuan}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>{{x.total}}</td>
+                </tr>
+
+            </table>
+        </div>
+            </fieldset>
+    </form>
+    <br><br><br>
+</div>
